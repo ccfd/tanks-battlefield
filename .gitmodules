@@ -1,3 +1,0 @@
-[submodule "lib/ok.sh"]
-	path = lib/ok.sh
-	url = git@github.com:whiteinge/ok.sh.git
