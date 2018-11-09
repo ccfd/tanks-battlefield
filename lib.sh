@@ -40,3 +40,11 @@ function fail {
 	echo -ne "\e[91m$1\e[0m\n"
 }
 
+function slow_write {
+	while IFS='' read -d '' -n1 c
+	do
+		T=$[10000 + ($RANDOM % 500)]
+		sleep 0.${T:2:3}
+		echo -n "$c"
+	done < <(echo "$@")
+}
