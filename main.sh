@@ -15,5 +15,5 @@ cd tanks
 while true
 do
 slow_run make
-slow_run ./main -t 60 SimpleBot SimpleBot
+slow_run ./main "$@" SimpleBot SimpleBot
 done
