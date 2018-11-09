@@ -12,6 +12,8 @@ function slow_run {
 
 cd tanks
 
+clear
+
 while true
 do
 slow_run make
