@@ -20,9 +20,10 @@ fi
 OPTS="$OPTS -o $[$RANDOM % 5]"
 
 cd tanks
-rsync -a /home/vncuser/grading/tanks-players/ src/
+rsync -au /home/vncuser/grading/tanks-players/ src/
+echo
 slow_run make
-make players.txt
+make players.txt >/dev/null 2>&1
 cat players.txt | grep -v "KeyboardPlayer" >bots.txt
 test -f "bots.txt"
 BOTS="$(shuf -n 2 bots.txt)"
