@@ -5,5 +5,8 @@ clear
 
 while true
 do
-./run.sh "$@"
+	if ! ./run.sh "$@"
+	then
+		sleep 10
+	fi
 done
