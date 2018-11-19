@@ -23,6 +23,9 @@ cd tanks
 rsync -a /home/vncuser/grading/tanks-players/ src/
 slow_run make
 make players.txt
-BOTS="$(shuf -n 2 players.txt)"
+cat players.txt | grep -v "KeyboardPlayer" >bots.txt
+test -f "bots.txt"
+BOTS="$(shuf -n 2 bots.txt)"
 echo
-slow_run ./main $OPTS $BOTS
+slow_run ./main $OPTS $BOTS 2>/dev/null | tee out.log
+cat out.log | grep "^Results:" | tail -n 1 | sed 's|^Results:||' >> ../results.log

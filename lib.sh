@@ -43,7 +43,7 @@ function fail {
 function slow_write {
 	while IFS='' read -d '' -n1 c
 	do
-		T=$[10000 + ($RANDOM % 500)]
+		T=$[10000 + ($RANDOM % 200)]
 		sleep 0.${T:2:3}
 		echo -n "$c"
 	done < <(echo "$@")
