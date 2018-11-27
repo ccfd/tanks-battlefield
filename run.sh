@@ -28,8 +28,14 @@ case "$[$RANDOM % 6]" in
 1)	BOTS="$(echo $BOTS | sed 's|\([^ ]*\)|\1:2|g')";;
 esac
 
+#BOTS="$(shuf -n 4 bots.txt | sed 's|\([^ ]*\)|\1:2|g')"
+
 echo
-../elo/elo <../results.log
+(cd ..; elo/elo <results.log | tee elo.txt)
+if test -f "../elo.txt"
+then
+	OPTS="$OPTS -b ../elo.txt:16"
+fi
 echo
 slow_run ./main $OPTS $BOTS 2>/dev/null | tee out.log
-cat out.log | grep "^Results:" | tail -n 1 | sed 's|^Results:||' >> ../results.log
+cat out.log | grep "^Results:" | tail -n 1 | sed 's|^Results:||' | sed "s|\$| $(date +%s)|" >> ../results.log
